@@ -12,7 +12,7 @@ import StringUtil
 type Symbols = [String]
 type AST = Tree String
 
-parse cfg i = let s0 = getStart cfg in pruneValid $ matchRules i (getRules s0 cfg) (leaf s0)
+parse cfg i = let s0 = getStart cfg in map fst $ pruneValid $ matchRules i (getRules s0 cfg) (leaf s0)
   where
     matchRules :: String -> [Symbols] -> AST -> [(AST, String)]
     matchRules i rs n = concat $ foldl (\acc ts -> case matchRule i ts n of xxs@(x:xs) -> xxs:acc; [] -> acc) [] rs
